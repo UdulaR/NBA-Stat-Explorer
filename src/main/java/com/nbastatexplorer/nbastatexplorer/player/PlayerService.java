@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 //Service Layer
+//calls repository to access database
 @Component
 //managed by spring container --> create instance of class and manage lifecycle
 public class PlayerService {
@@ -77,8 +78,8 @@ public class PlayerService {
     }
 
     @Transactional
-    public void deletePlayer(Player playerName) {
-        playerRepository.deleteByName(playerName.getName());
+    public void deletePlayer(String playerName) {
+        playerRepository.deleteByName(playerName);
     }
 
 
