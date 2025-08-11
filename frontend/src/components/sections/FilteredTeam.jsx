@@ -1,26 +1,26 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom" //returns object of key/value-pairs of dynamic params from current url that were matched by routes
+import { useEffect, useState } from "react"
+export const FilteredTeam = () =>{
+    const {team} = useParams();
+    const [players, setPlayers] = useState([]); //list originally has no players --> setPlayers will put players in
 
-export const FilteredPosition = () =>{
-    const {position} = useParams(); //gets value from url
-    const [players, setPlayers] = useState([]); //to put list of players into list to display
-
-    useEffect(() => {
+    useEffect(() =>{
         fetch("http://localhost:8080/player")
-        .then((res) =>res.json())
-        .then((data) => {
-            const filtered = data.filter((p) => p.position === position);
-            setPlayers(filtered)
+        .then((res)=>res.json())
+        .then((data) =>{
+            const filtered = data.filter((p)=> p.team === team); //filter players by check the player objects team with the team that is been looked at
+            setPlayers(filtered) //set players to list
+
         })
         .catch((err) => console.error("Error fetching players", err));
-    }, [position]);
+    }, [team])
 
     return (
         <section className="min-h-screen p-6 text-white">
-            <h1 className="text-3xl font-bold mb-6 text-center">{position} - Players</h1>
-            <table className="w-full border border-gray-300">
+            <h1 className="text-3xl font-bold mb-6 text-center">{team} Roster</h1>
+            <table className="w-full borer borer-gray-300">
                 <thead className="bg-gray-300">
-                    <tr> 
+                    <tr>
                         <th className="border px-4 py-2">Name</th>
                         <th className="border px-4 py-2">Team</th>
                         <th className="border px-4 py-2">Position</th>
@@ -31,6 +31,7 @@ export const FilteredPosition = () =>{
                         <th className="border px-4 py-2">BLKS</th>
                         
                     </tr>
+
                 </thead>
 
                 <tbody>
@@ -44,12 +45,13 @@ export const FilteredPosition = () =>{
                             <td className="border px-4 py-2">{p.trb}</td>
                             <td className="border px-4 py-2">{p.stls}</td>
                             <td className="border px-4 py-2">{p.blks}</td>
-                        </tr>))}
+                        </tr>
+                    ))}
                 </tbody>
 
             </table>
+
         </section>
     );
-
 
 }

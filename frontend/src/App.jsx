@@ -8,6 +8,10 @@ import { Navbar } from './components/Navbar'
 import {Players} from './components/sections/Players';
 import { Position } from './components/sections/Position';
 import { FilteredPosition } from './components/sections/FilteredPosition';
+import { Teams } from './components/sections/Teams';
+import {FilteredTeam} from './components/sections/FilteredTeam';
+
+
 import './App.css'
 
 function App() {
@@ -16,11 +20,16 @@ function App() {
   return (
     <>
     <Navbar/>
+    {/* Route Paths */}
     <Routes>
       <Route path="/" element={<Home />}/>
       <Route path="/players" element={<Players />}/>
+      <Route path="/teams" element={<Teams/>}/>
+      <Route path="/teams/:team" element={<FilteredTeam/>}/>
+
       <Route path="/position" element={<Position />}/>
-      <Route path="/positions/:position" element={<FilteredPosition/>}/>
+      <Route path="/positions/:position" element={<FilteredPosition/>}/> 
+      
 
     </Routes>
     

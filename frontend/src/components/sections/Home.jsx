@@ -1,5 +1,5 @@
 import nbapic from '../../assets/nbapic.jpg'
-import jordan from '../../assets/jordan.jpg'
+
 
 export const Home = () =>{
     return(
