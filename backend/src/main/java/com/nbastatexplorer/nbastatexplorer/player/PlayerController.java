@@ -10,11 +10,12 @@ import java.util.List;
 
 // how computers talk to each other over web --> when browser, app or frontend wants data it sends http request
 // Parts of http inlude:
-// http method (what type of action your doing --> GET(retireve data) POST(send data to create something PUT(Update existing item) DELETE(remove item)
+// ht
+// tp method (what type of action your doing --> GET(retireve data) POST(send data to create something PUT(Update existing item) DELETE(remove item)
 // URL (Path) - where your going
 // Headers - metadata (auth info, content type)
 // Body - actual data (used in POST/PUT) --> in this case player data in json
-
+@CrossOrigin(origins = "http://localhost:5173")
 //rest controller handles incoming http requests --> puts in service layer and gives out output
 @RestController //every method returns a object (data - json) instead of view (html) --> view renders user interface
 @RequestMapping(path="/player")//class/method handle http requests that match the path
@@ -52,17 +53,18 @@ public class PlayerController {
     @PostMapping
     public ResponseEntity<Player> addPlayer(@RequestBody Player player){ //Requestbody converts json in request body to java object - reads http request and turn into a java object
         Player createdPlayer = playerService.addPlayer(player);
-        return new  ResponseEntity<>(createdPlayer, HttpStatus.CREATED);
+        return new  ResponseEntity<>(createdPlayer, HttpStatus.CREATED); //httpstatus tells clienbt what happens during request
+        //httpstatus 201
     }
 
-    // Put(uopdate) /player requests
+    // Put(update) /player requests
     @PutMapping
     public ResponseEntity<Player> updatePlayer(@RequestBody Player player){
         Player updatedPlayer = playerService.updatePlayer(player);
         if (updatedPlayer != null){
-            return new  ResponseEntity<>(updatedPlayer, HttpStatus.OK);
+            return new  ResponseEntity<>(updatedPlayer, HttpStatus.OK); //http status 200
         }else{
-            return new  ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new  ResponseEntity<>(HttpStatus.NOT_FOUND); //http 404
         }
     }
 
@@ -70,7 +72,7 @@ public class PlayerController {
     @DeleteMapping("/{playerName}")
     public ResponseEntity<String> deletePlayer(@PathVariable String playerName){ // Pathvariable when value is part of http url
         playerService.deletePlayer(playerName);
-        return new  ResponseEntity<>("Player deleted successfully", HttpStatus.OK);
+        return new  ResponseEntity<>("Player deleted successfully", HttpStatus.OK); //http ok 200 --> succeded
 
     }
 
