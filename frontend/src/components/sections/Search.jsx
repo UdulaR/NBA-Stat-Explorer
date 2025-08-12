@@ -6,6 +6,10 @@ export const Search = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        if (!q.trim()){
+            setResults([]);
+            return;
+        }
         const res = await fetch(
             `http://localhost:8080/player?name=${encodeURIComponent(q)}`
         );
@@ -19,35 +23,39 @@ export const Search = () => {
                 <button type="submit" className="bg-black text-white font-bold text-xl rounded-xl hover:bg-orange-700 hover:-translate-y-2 transition p-5">GO</button>
             </form>
 
-            <h1 className="text-2xl font-bold mb-4 pt-14 text-center">Stats</h1>
-      <table className="w-full border border-gray-300">
-        <thead className="bg-gray-200">
-          <tr>
-            <th className="border border-gray-300 px-4 py-2">Name</th>
-            <th className="border border-gray-300 px-4 py-2">Team</th>
-            <th className="border border-gray-300 px-4 py-2">Position</th>
-            <th className="border border-gray-300 px-4 py-2">PPG</th>
-            <th className="border border-gray-300 px-4 py-2">AST</th>
-            <th className="border border-gray-300 px-4 py-2">TRB</th>
-            <th className="border border-gray-300 px-4 py-2">STLS</th>
-            <th className="border border-gray-300 px-4 py-2">BLKS</th>
-          </tr>
-        </thead>
-        <tbody>
-          {results.map((player) => (
-            <tr key={player.name}>
-              <td className="border px-4 py-2">{player.name}</td>
-              <td className="border px-4 py-2">{player.team}</td>
-              <td className="border px-4 py-2">{player.position}</td>
-              <td className="border px-4 py-2">{player.ppg}</td>
-              <td className="border px-4 py-2">{player.ast}</td>
-              <td className="border px-4 py-2">{player.trb}</td>
-              <td className="border px-4 py-2">{player.stls}</td>
-              <td className="border px-4 py-2">{player.blks}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            {results.length > 0 && (
+            <table className="w-full border border-gray-300 mt-10">
+                <thead className="bg-gray-200">
+                <tr>
+                    <th className="border border-gray-300 px-4 py-2">Name</th>
+                    <th className="border border-gray-300 px-4 py-2">Team</th>
+                    <th className="border border-gray-300 px-4 py-2">Position</th>
+                    <th className="border border-gray-300 px-4 py-2">PPG</th>
+                    <th className="border border-gray-300 px-4 py-2">AST</th>
+                    <th className="border border-gray-300 px-4 py-2">TRB</th>
+                    <th className="border border-gray-300 px-4 py-2">STLS</th>
+                    <th className="border border-gray-300 px-4 py-2">BLKS</th>
+                </tr>
+                </thead>
+                <tbody>
+                {results.map((player) => (
+                    <tr key={player.name}>
+                    <td className="border px-4 py-2">{player.name}</td>
+                    <td className="border px-4 py-2">{player.team}</td>
+                    <td className="border px-4 py-2">{player.position}</td>
+                    <td className="border px-4 py-2">{player.ppg}</td>
+                    <td className="border px-4 py-2">{player.ast}</td>
+                    <td className="border px-4 py-2">{player.trb}</td>
+                    <td className="border px-4 py-2">{player.stls}</td>
+                    <td className="border px-4 py-2">{player.blks}</td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+                
+
+            )}
+        
            
 
         </section>
