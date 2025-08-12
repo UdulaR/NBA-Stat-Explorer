@@ -8,7 +8,8 @@ export const Teams = () =>{
     //list containing list of teams
 
     return(
-        <section id="teams" className="min-h-screen flex justify-center items-center relative mt-20">
+        <section id="teams" className="min-h-screen flex flex-col justify-center items-center relative mt-20">
+            <h1 className="text-black font-bold text-5xl mb-10">Teams</h1>
             <div className="flex flex-wrap justify-center gap-6 max-2-5xl mx-auto">
                 {/* /teams/${team} routes to designated team page when button clicked*/}
                 {teams.map((team) => (<button key={team} onClick={() => navigate(`/teams/${team}`)} className="font-bold text-5xl text-white bg-black p-5 rounded-xl hover:bg-orange-700 hover:-translate-y-2 transition">

@@ -16,8 +16,8 @@ export const FilteredPosition = () =>{
     }, [position]);
 
     return (
-        <section className="min-h-screen p-6 text-white">
-            <h1 className="text-3xl font-bold mb-6 text-center">{position} - Players</h1>
+        <section className="min-h-screen p-6 text-black">
+            <h1 className="text-3xl font-bold mb-6 text-center mt-14">Position: {position}</h1>
             <table className="w-full border border-gray-300">
                 <thead className="bg-gray-300">
                     <tr> 

@@ -5,7 +5,9 @@ export const FilteredTeam = () =>{
     const [players, setPlayers] = useState([]); //list originally has no players --> setPlayers will put players in
 
     useEffect(() =>{
-        fetch("http://localhost:8080/player")
+        fetch("http://localhost:8080/player") //goes to endpoint /player
+        //if /teams gives cors error --> cross origin resource sharing --> security mechanism built into browesers that decide whether a webpage is allowed to request sources from a different origin
+        //origin = protocol + domain + port
         .then((res)=>res.json())
         .then((data) =>{
             const filtered = data.filter((p)=> p.team === team); //filter players by check the player objects team with the team that is been looked at
@@ -16,8 +18,12 @@ export const FilteredTeam = () =>{
     }, [team])
 
     return (
-        <section className="min-h-screen p-6 text-white">
-            <h1 className="text-3xl font-bold mb-6 text-center">{team} Roster</h1>
+        <section className="min-h-screen p-6 text-black">
+            <div className="mt-14 flex items-center justify-center mb-5">
+                <img src={`/logos/${team}.png`}/>
+            </div>
+            
+            
             <table className="w-full borer borer-gray-300">
                 <thead className="bg-gray-300">
                     <tr>
